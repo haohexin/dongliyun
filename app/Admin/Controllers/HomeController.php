@@ -16,7 +16,7 @@ class HomeController extends Controller
         return Admin::content(function (Content $content) {
 
             $content->header('仪表盘');
-            
+
             $content->row(function (Row $row) {
 
                 $row->column(4, function (Column $column) {
