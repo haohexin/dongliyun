@@ -12,6 +12,8 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
+    $router->resource('users', UserController::class);
+
     $router->resource('devices', DeviceController::class);
     $router->resource('deviceCategories', DeviceCategoryController::class);
     $router->resource('deviceFields', DeviceFieldController::class);
