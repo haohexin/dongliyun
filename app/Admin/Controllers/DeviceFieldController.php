@@ -78,6 +78,7 @@ class DeviceFieldController extends Controller
             $grid->column('max', '最大值')->editable();
             $grid->column('min', '最小值')->editable();
             $grid->column('color', '颜色')->editable();
+            $grid->model()->orderBy('id', 'desc');
             $grid->created_at();
             $grid->updated_at();
         });
