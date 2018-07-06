@@ -2,12 +2,11 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\DeviceCategory;
-
-use App\Models\DeviceCategoryCurve;
-use App\Models\DeviceField;
 use Encore\Admin\Form;
+
 use Encore\Admin\Grid;
+use App\Models\DeviceField;
+use App\Models\DeviceCategory;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
@@ -81,7 +80,9 @@ class DeviceCategoryController extends Controller
 
                 $curves = array_map(function ($curve) {
                     $field = DeviceField::find($curve['field_id']);
-                    return "<span class='label label-success'>{$field->title}</span>";
+                    if ($field) {
+                        return "<span class='label label-success'>{$field->title}</span>";
+                    }
                 }, $curves);
 
                 return join('&nbsp;', $curves);
