@@ -114,11 +114,13 @@ class DeviceCategoryController extends Controller
             $form->text('title', '类型');
             $form->text('number', '类型标志');
             $form->number('length', '位长度');
+
             $fields = DeviceField::get()->pluck('title', 'id');
             $form->hasMany('curves', '核心字段', function ($form) use ($fields) {
                 $form->select('field_id', '字段')->options($fields);
                 $form->number('bit', '开始位');
                 $form->number('length', '长度');
+                $form->switch('show', '显示');
             });
 //            $form->hasMany('arguments', '参数包含项', function ($form) use ($fields) {
 //                $form->select('field_id', '字段')->options($fields);

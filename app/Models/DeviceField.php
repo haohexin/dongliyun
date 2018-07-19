@@ -8,3 +8,4 @@ class DeviceField extends Model
 {
     //
 }
+
