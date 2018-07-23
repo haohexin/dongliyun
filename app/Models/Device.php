@@ -28,4 +28,9 @@ class Device extends Model
     {
         return $this->hasOne(City::class, 'city_id', 'base_district_city');
     }
+
+    public function runtimedata()
+    {
+        return $this->hasMany(RuntimeData::class, 'device_id');
+    }
 }

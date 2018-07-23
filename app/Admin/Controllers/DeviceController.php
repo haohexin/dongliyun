@@ -76,6 +76,7 @@ class DeviceController extends Controller
             $grid->column('base_customer', '客户名称')->editable();
             $grid->column('category.title', '设备类型')->label('warning');
             $grid->column('base_model_user', '型号识别定义编号');
+            $grid->column('base_serial', '设备序列号');
             $grid->column('region.region_name', '大区')->label();
             $grid->column('province.province_name', '省')->label();
             $grid->column('city.city_name', '市')->label();

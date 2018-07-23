@@ -18,5 +18,7 @@ Route::group([
     $router->resource('deviceCategories', DeviceCategoryController::class);
     $router->resource('deviceFields', DeviceFieldController::class);
 
+    $router->resource('runtimeData', RuntimeDataController::class);
+
 
 });
