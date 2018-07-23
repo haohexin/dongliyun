@@ -76,9 +76,9 @@ class RuntimeDataController extends Controller
             $grid->runtime_data_id('ID')->sortable();
             $grid->column('device.base_customer', '客户');
             $grid->column('device.base_model_user', '型号识别定义编号');
-            $grid->column('device.base_serial', '设备序列号');
+            $grid->column('device.base_serial', '设备序列号')->label();
             $grid->column('instantaneous_power', '瞬时功率/KW');
-            $grid->column('accumulative_power', '累计功率/KW');
+            $grid->column('accumulative_power', '累计功率/KW')->label();
             $grid->column('insert_time','创建时间')->display(function () {
                 return Carbon::createFromTimestamp($this->insert_time)->toDateTimeString();
             });
