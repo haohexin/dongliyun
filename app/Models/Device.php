@@ -14,6 +14,13 @@ class Device extends Model
         return $this->hasOne(DeviceCategory::class, 'id', 'category_id');
     }
 
+    public function curveCategory()
+        {
+            return $this->hasOne(CurveCategory::class, 'id', 'curve_category_id')->withDefault(
+                ['title' => '暂无']
+            );
+        }
+
     public function region()
     {
         return $this->hasOne(Region::class, 'region_id', 'base_district_region');

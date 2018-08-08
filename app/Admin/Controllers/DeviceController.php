@@ -2,17 +2,17 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Device;
-use App\Models\DeviceCategory;
-use App\Models\Province;
 use App\Models\Region;
-use Encore\Admin\Controllers\ModelForm;
-use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
+use App\Models\Province;
+use App\Models\DeviceCategory;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
+use App\Http\Controllers\Controller;
+use Encore\Admin\Controllers\ModelForm;
 
 class DeviceController extends Controller {
 	use ModelForm;
@@ -69,6 +69,7 @@ class DeviceController extends Controller {
 			$grid->id('ID')->sortable();
 			$grid->column('base_customer', '客户名称')->editable();
 			$grid->column('category.title', '设备类型')->label('warning');
+			$grid->column('curveCategory.title', '曲线类型')->label();
 			$grid->column('base_model_user', '型号识别定义编号');
 			$grid->column('base_serial', '设备序列号')->sortable();
 			$grid->column('region.region_name', '大区')->label();
@@ -85,9 +86,16 @@ class DeviceController extends Controller {
 	 */
 	protected function form() {
 		return Admin::form(Device::class, function (Form $form) {
+			$url_array = explode('/', \URL::full());
+			if (count($url_array) > 5 && is_numeric($url_array[5])) {
+				$curve_categories = Device::find($url_array[5])->category->curve->pluck('title', 'id');
+			} else {
+				$curve_categories = CurveCategory::pluck('title', 'id');
+			}
 			$form->display('id', 'ID');
 			$form->text('base_customer', '客户名称');
 			$form->select('category_id', '设备类型')->options(DeviceCategory::pluck('title', 'id'));
+			$form->select('curve_category_id', '曲线')->options($curve_categories);
 			$form->text('base_model_head', '型号识别头编号');
 			$form->text('base_model_user', '型号识别定义编号');
 			$form->text('base_model_tail', '型号识别尾编号');
