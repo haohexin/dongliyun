@@ -110,21 +110,44 @@ class DeviceCategoryController extends Controller
     {
         return Admin::form(DeviceCategory::class, function (Form $form) {
 
-            $form->display('id', 'ID');
-            $form->text('title', '类型');
-            $form->text('number', '类型标志');
-            $form->number('length', '位长度');
-
-            $fields = DeviceField::get()->pluck('title', 'id');
-            $form->hasMany('curves', '核心字段', function ($form) use ($fields) {
-                $form->select('field_id', '字段')->options($fields);
-                $form->number('bit', '开始位');
-                $form->number('length', '长度');
-                $form->switch('show', '显示');
-            });
+            // $form->display('id', 'ID');
+            // $form->text('title', '类型');
+            // $form->text('number', '类型标志');
+            // $form->number('length', '位长度');
+            //
+            // $fields = DeviceField::get()->pluck('title', 'id');
+            // $form->hasMany('curves', '核心字段', function ($form) use ($fields) {
+            //     $form->select('field_id', '字段')->options($fields);
+            //     $form->number('bit', '开始位');
+            //     $form->number('length', '长度');
+            //     $form->switch('show', '显示');
+            // });
 //            $form->hasMany('arguments', '参数包含项', function ($form) use ($fields) {
 //                $form->select('field_id', '字段')->options($fields);
 //            });
+
+            $form->tab('基本信息', function ($form) {
+
+                $form->display('id', 'ID');
+                $form->text('title', '类型');
+                $form->text('number', '类型标志');
+                $form->number('length', '位长度');
+
+            })->tab('核心字段', function ($form) {
+
+                $fields = DeviceField::get()->pluck('title', 'id');
+                $form->hasMany('curves', '核心字段', function ($form) use ($fields) {
+                    $form->select('field_id', '字段')->options($fields);
+                    $form->number('bit', '开始位');
+                    $form->number('length', '长度');
+                });
+
+            })->tab('曲线类型', function ($form) {
+                $form->hasMany('curve', '曲线类型', function ($form) {
+                    $form->text('title', '类型');
+                });
+            });
+
         });
     }
 }

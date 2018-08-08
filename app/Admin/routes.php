@@ -16,9 +16,8 @@ Route::group([
 
     $router->resource('devices', DeviceController::class);
     $router->resource('deviceCategories', DeviceCategoryController::class);
+    $router->resource('curveCategories', CurveCategoryController::class);
     $router->resource('deviceFields', DeviceFieldController::class);
 
     $router->resource('runtimeData', RuntimeDataController::class);
-
-
 });
